@@ -1,0 +1,556 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Anual SEO - Astec Brasil 2025</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .period {
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+
+        .tabs {
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+            border: none;
+            background: #f3f4f6;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: #4b5563;
+        }
+
+        .tab:hover {
+            background: #e5e7eb;
+            transform: translateY(-2px);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .metric-card h3 {
+            font-size: 0.9em;
+            color: #6b7280;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-card .value {
+            font-size: 2.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .metric-card .change {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .highlight-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .highlight-card {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .highlight-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .highlight-card .big-number {
+            font-size: 4em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .chart-container h3 {
+            margin-bottom: 25px;
+            color: #1f2937;
+            font-size: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 18px 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:hover {
+            background: #f9fafb;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        footer {
+            background: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn-export {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-export:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏆 Astec Brasil</h1>
+            <div class="subtitle">Relatório Anual de SEO & Engajamento Digital 2025</div>
+            <div class="period">📅 Período: 1 de Janeiro - 15 de Dezembro de 2025</div>
+            <div style="margin-top: 20px;">
+                <button class="btn-export" onclick="window.print()">📄 Exportar PDF</button>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('overview')">📊 Visão Geral</button>
+            <button class="tab" onclick="showTab('analytics')">📈 Google Analytics</button>
+            <button class="tab" onclick="showTab('search')">🔍 Search Console</button>
+            <button class="tab" onclick="showTab('performance')">🏆 Performance</button>
+        </div>
+
+        <!-- VISÃO GERAL -->
+        <div id="overview" class="content active">
+            <div class="metrics-grid">
+                <div class="metric-card" style="border-color: #3b82f6;">
+                    <h3>👥 Usuários Ativos</h3>
+                    <div class="value" style="color: #3b82f6;">4.600</div>
+                    <div class="change">↗ +10.6%</div>
+                </div>
+                <div class="metric-card" style="border-color: #8b5cf6;">
+                    <h3>✨ Novos Usuários</h3>
+                    <div class="value" style="color: #8b5cf6;">4.600</div>
+                    <div class="change">↗ +10.7%</div>
+                </div>
+                <div class="metric-card" style="border-color: #ec4899;">
+                    <h3>🎯 Total de Eventos</h3>
+                    <div class="value" style="color: #ec4899;">23.000</div>
+                    <div class="change">↗ +10.2%</div>
+                </div>
+                <div class="metric-card" style="border-color: #f59e0b;">
+                    <h3>⏱️ Tempo Médio</h3>
+                    <div class="value" style="color: #f59e0b;">23s</div>
+                    <div class="change">↗ +2.1%</div>
+                </div>
+            </div>
+
+            <div class="highlight-cards">
+                <div class="highlight-card" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                    <h3>🎯 Crescimento Anual</h3>
+                    <div class="big-number">+10.6%</div>
+                    <p>Aumento consistente em todas as métricas principais</p>
+                </div>
+                <div class="highlight-card" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+                    <h3>🔍 Tráfego Orgânico</h3>
+                    <div class="big-number">63%</div>
+                    <p>Predominância de buscas orgânicas no Google</p>
+                </div>
+                <div class="highlight-card" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+                    <h3>📄 Página Inicial</h3>
+                    <div class="big-number">5.2k</div>
+                    <p>Visualizações da home page</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- GOOGLE ANALYTICS -->
+        <div id="analytics" class="content">
+            <div class="grid-2">
+                <div class="chart-container">
+                    <h3>📊 Origem do Tráfego</h3>
+                    <canvas id="trafficChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>📄 Páginas Mais Visitadas</h3>
+                    <canvas id="pagesChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3>🌍 Top 5 Cidades</h3>
+                <canvas id="citiesChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h3>📈 Sessões por Origem</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Origem / Mídia</th>
+                            <th>Sessões</th>
+                            <th>Crescimento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Google / Organic</strong></td>
+                            <td>3.500</td>
+                            <td style="color: #10b981; font-weight: 600;">↗ +8.6%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Direto / (none)</strong></td>
+                            <td>1.500</td>
+                            <td style="color: #10b981; font-weight: 600;">↗ +15.2%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bing / Organic</strong></td>
+                            <td>238</td>
+                            <td style="color: #10b981; font-weight: 600;">↗ +6.7%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Instagram / Referral</strong></td>
+                            <td>21</td>
+                            <td style="color: #10b981; font-weight: 600;">↗ +8.7%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SEARCH CONSOLE -->
+        <div id="search" class="content">
+            <div class="chart-container">
+                <h3>🔍 Top 10 Palavras-Chave (Exemplo)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Consulta</th>
+                            <th>Cliques</th>
+                            <th>Impressões</th>
+                            <th>CTR</th>
+                            <th>Posição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>astec brasil</td>
+                            <td>850</td>
+                            <td>12.500</td>
+                            <td>6.8%</td>
+                            <td>1.2</td>
+                        </tr>
+                        <tr>
+                            <td>serviços astec</td>
+                            <td>320</td>
+                            <td>5.200</td>
+                            <td>6.2%</td>
+                            <td>2.5</td>
+                        </tr>
+                        <tr>
+                            <td>astec contato</td>
+                            <td>180</td>
+                            <td>2.800</td>
+                            <td>6.4%</td>
+                            <td>1.8</td>
+                        </tr>
+                        <tr>
+                            <td>soluções industriais</td>
+                            <td>145</td>
+                            <td>4.100</td>
+                            <td>3.5%</td>
+                            <td>5.2</td>
+                        </tr>
+                        <tr>
+                            <td>novidades mercado</td>
+                            <td>98</td>
+                            <td>1.900</td>
+                            <td>5.2%</td>
+                            <td>3.4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card" style="border-color: #3b82f6;">
+                    <h3>💻 Desktop</h3>
+                    <div class="value" style="color: #3b82f6; font-size: 2em;">2.450</div>
+                    <p><strong>CTR:</strong> 5.8% | <strong>Posição:</strong> 2.1</p>
+                </div>
+                <div class="metric-card" style="border-color: #ec4899;">
+                    <h3>📱 Mobile</h3>
+                    <div class="value" style="color: #ec4899; font-size: 2em;">1.820</div>
+                    <p><strong>CTR:</strong> 5.2% | <strong>Posição:</strong> 2.8</p>
+                </div>
+                <div class="metric-card" style="border-color: #8b5cf6;">
+                    <h3>⌨️ Tablet</h3>
+                    <div class="value" style="color: #8b5cf6; font-size: 2em;">330</div>
+                    <p><strong>CTR:</strong> 4.9% | <strong>Posição:</strong> 3.2</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PERFORMANCE -->
+        <div id="performance" class="content">
+            <div class="chart-container">
+                <h3>🌍 Alcance Global - Top 10 Países</h3>
+                <canvas id="countriesChart"></canvas>
+            </div>
+
+            <div class="highlight-cards">
+                <div class="highlight-card" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                    <h3>🎯 Taxa de Crescimento</h3>
+                    <div class="big-number">+10.6%</div>
+                    <p>Crescimento consistente em todas as métricas</p>
+                </div>
+                <div class="highlight-card" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+                    <h3>🌍 Presença Global</h3>
+                    <div class="big-number">118</div>
+                    <p>Países alcançados organicamente</p>
+                </div>
+                <div class="highlight-card" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                    <h3>⭐ Taxa de Rejeição</h3>
+                    <div class="big-number">48%</div>
+                    <p>Excelente engajamento dos visitantes</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <h2 style="margin-bottom: 15px;">Astec Brasil - Relatório Anual SEO 2025</h2>
+            <p style="opacity: 0.8; margin-bottom: 10px;">Dados extraídos de Google Analytics e Google Search Console</p>
+            <p style="opacity: 0.6; font-size: 0.9em;">astecbrasil.com.br</p>
+        </footer>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            const contents = document.querySelectorAll('.content');
+            const tabs = document.querySelectorAll('.tab');
+            
+            contents.forEach(content => content.classList.remove('active'));
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Gráfico de Tráfego (Pizza)
+        const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+        new Chart(trafficCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Google Organic', 'Direto', 'Bing', 'Social Media'],
+                datasets: [{
+                    data: [2900, 1300, 195, 206],
+                    backgroundColor: ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // Gráfico de Páginas
+        const pagesCtx = document.getElementById('pagesChart').getContext('2d');
+        new Chart(pagesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Página Inicial', 'Serviços', 'Contato', 'Novidades'],
+                datasets: [{
+                    label: 'Visualizações',
+                    data: [5200, 665, 592, 277],
+                    backgroundColor: '#3b82f6'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // Gráfico de Cidades
+        const citiesCtx = document.getElementById('citiesChart').getContext('2d');
+        new Chart(citiesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['São Paulo', 'Belo Horizonte', 'Rio de Janeiro', 'Vespasiano', 'Contagem'],
+                datasets: [{
+                    label: 'Usuários',
+                    data: [941, 426, 102, 86, 82],
+                    backgroundColor: '#8b5cf6'
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true
+            }
+        });
+
+        // Gráfico de Países
+        const countriesCtx = document.getElementById('countriesChart').getContext('2d');
+        new Chart(countriesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Brasil', 'EUA', 'Portugal', 'Espanha', 'Argentina', 'México', 'Chile', 'Colômbia'],
+                datasets: [{
+                    label: 'Cliques',
+                    data: [3850, 420, 180, 145, 98, 75, 62, 48],
+                    backgroundColor: '#10b981'
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+</body>
+</html>
