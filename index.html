@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -6,348 +7,55 @@
     <title>Relatório Anual SEO - Astec Brasil 2025</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0051a5 0%, #003d7a 100%);
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background: linear-gradient(135deg, #0051a5 0%, #003d7a 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .logo-section {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .logo-container {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            display: inline-block;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
-        }
-
-        .logo-container img {
-            max-width: 300px;
-            height: auto;
-            display: block;
-        }
-
-        .header-text {
-            flex: 2;
-            min-width: 300px;
-        }
-
-        h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .subtitle {
-            font-size: 1.3em;
-            opacity: 0.95;
-            margin-bottom: 15px;
-        }
-
-        .period {
-            font-size: 0.95em;
-            opacity: 0.8;
-            background: rgba(255,255,255,0.1);
-            padding: 10px 20px;
-            border-radius: 10px;
-            display: inline-block;
-            margin-top: 10px;
-        }
-
-        .btn-export {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            margin: 10px 10px 0 0;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
-        }
-
-        .btn-export:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .tabs {
-            background: white;
-            border-radius: 15px;
-            padding: 10px;
-            margin-bottom: 30px;
-            display: flex;
-            gap: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            flex-wrap: wrap;
-            position: sticky;
-            top: 10px;
-            z-index: 100;
-        }
-
-        .tab {
-            flex: 1;
-            min-width: 180px;
-            padding: 18px 15px;
-            border: none;
-            background: #f3f4f6;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            transition: all 0.3s;
-            color: #4b5563;
-        }
-
-        .tab:hover {
-            background: #e5e7eb;
-            transform: translateY(-2px);
-        }
-
-        .tab.active {
-            background: linear-gradient(135deg, #0051a5 0%, #003d7a 100%);
-            color: white;
-            box-shadow: 0 5px 15px rgba(0, 81, 165, 0.4);
-        }
-
-        .content {
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-
-        .content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .metric-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            border-left: 5px solid;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .metric-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .metric-card h3 {
-            font-size: 0.9em;
-            color: #6b7280;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .metric-card .value {
-            font-size: 2.8em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .metric-card .change {
-            color: #10b981;
-            font-weight: 600;
-            font-size: 1.1em;
-        }
-
-        .highlight-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .highlight-card {
-            background: linear-gradient(135deg, #0051a5 0%, #003d7a 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s;
-        }
-
-        .highlight-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .highlight-card h3 {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-
-        .highlight-card .big-number {
-            font-size: 4em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .chart-container {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .chart-container h3 {
-            margin-bottom: 25px;
-            color: #1f2937;
-            font-size: 1.5em;
-            border-bottom: 3px solid #0051a5;
-            padding-bottom: 10px;
-        }
-
-        table {
-            width: 100%;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        th {
-            background: linear-gradient(135deg, #0051a5 0%, #003d7a 100%);
-            color: white;
-            padding: 20px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.95em;
-        }
-
-        td {
-            padding: 18px 20px;
-            border-bottom: 1px solid #e5e7eb;
-            font-size: 0.9em;
-        }
-
-        tr:hover {
-            background: #f9fafb;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .analysis-section {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .analysis-section h2 {
-            color: #0051a5;
-            margin-bottom: 20px;
-            font-size: 2em;
-            border-bottom: 3px solid #0051a5;
-            padding-bottom: 10px;
-        }
-
-        .analysis-section h3 {
-            color: #003d7a;
-            margin: 25px 0 15px 0;
-            font-size: 1.5em;
-        }
-
-        .analysis-section ul {
-            margin-left: 25px;
-            margin-bottom: 20px;
-        }
-
-        .analysis-section li {
-            margin-bottom: 10px;
-            line-height: 1.8;
-        }
-
-        .insight-box {
-            background: #f0f9ff;
-            border-left: 4px solid #0051a5;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-        }
-
-        footer {
-            background: #1f2937;
-            color: white;
-            text-align: center;
-            padding: 40px;
-            border-radius: 15px;
-            margin-top: 50px;
-        }
-
-        @media print {
-            .tabs, .btn-export { display: none; }
-            .content { display: block !important; page-break-after: always; }
-            body { background: white; }
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2em; }
-            .grid-2 { grid-template-columns: 1fr; }
-            .header-content { flex-direction: column; text-align: center; }
-            .tab { min-width: 150px; font-size: 0.9em; padding: 15px 10px; }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #0051a5 0%, #003d7a 100%); color: #333; line-height: 1.6; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(135deg, #0051a5 0%, #003d7a 100%); color: white; padding: 40px; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .header-content { display: flex; align-items: center; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+        .logo-section { flex: 1; min-width: 250px; }
+        .logo-container { background: white; padding: 20px; border-radius: 15px; display: inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 20px; }
+        .logo-container img { max-width: 300px; height: auto; display: block; }
+        .header-text { flex: 2; min-width: 300px; }
+        h1 { font-size: 3em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .subtitle { font-size: 1.3em; opacity: 0.95; margin-bottom: 15px; }
+        .period { font-size: 0.95em; opacity: 0.8; background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 10px; display: inline-block; margin-top: 10px; }
+        .btn-export { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1em; font-weight: 600; cursor: pointer; margin: 10px 10px 0 0; transition: all 0.3s; box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3); }
+        .btn-export:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); }
+        .tabs { background: white; border-radius: 15px; padding: 10px; margin-bottom: 30px; display: flex; gap: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); flex-wrap: wrap; position: sticky; top: 10px; z-index: 100; }
+        .tab { flex: 1; min-width: 180px; padding: 18px 15px; border: none; background: #f3f4f6; border-radius: 10px; cursor: pointer; font-size: 1em; font-weight: 600; transition: all 0.3s; color: #4b5563; }
+        .tab:hover { background: #e5e7eb; transform: translateY(-2px); }
+        .tab.active { background: linear-gradient(135deg, #0051a5 0%, #003d7a 100%); color: white; box-shadow: 0 5px 15px rgba(0, 81, 165, 0.4); }
+        .content { display: none; animation: fadeIn 0.5s; }
+        .content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .metric-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border-left: 5px solid; transition: transform 0.3s, box-shadow 0.3s; }
+        .metric-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .metric-card h3 { font-size: 0.9em; color: #6b7280; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .metric-card .value { font-size: 2.8em; font-weight: bold; margin-bottom: 10px; }
+        .metric-card .change { color: #10b981; font-weight: 600; font-size: 1.1em; }
+        .highlight-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .highlight-card { background: linear-gradient(135deg, #0051a5 0%, #003d7a 100%); color: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: transform 0.3s; }
+        .highlight-card:hover { transform: translateY(-5px); }
+        .highlight-card h3 { font-size: 1.5em; margin-bottom: 15px; }
+        .highlight-card .big-number { font-size: 4em; font-weight: bold; margin-bottom: 10px; }
+        .chart-container { background: white; padding: 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .chart-container h3 { margin-bottom: 25px; color: #1f2937; font-size: 1.5em; border-bottom: 3px solid #0051a5; padding-bottom: 10px; }
+        table { width: 100%; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        th { background: linear-gradient(135deg, #0051a5 0%, #003d7a 100%); color: white; padding: 20px; text-align: left; font-weight: 600; font-size: 0.95em; }
+        td { padding: 18px 20px; border-bottom: 1px solid #e5e7eb; font-size: 0.9em; }
+        tr:hover { background: #f9fafb; }
+        tr:last-child td { border-bottom: none; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; margin-bottom: 30px; }
+        .analysis-section { background: white; padding: 40px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .analysis-section h2 { color: #0051a5; margin-bottom: 20px; font-size: 2em; border-bottom: 3px solid #0051a5; padding-bottom: 10px; }
+        .analysis-section h3 { color: #003d7a; margin: 25px 0 15px 0; font-size: 1.5em; }
+        .analysis-section ul { margin-left: 25px; margin-bottom: 20px; }
+        .analysis-section li { margin-bottom: 10px; line-height: 1.8; }
+        .insight-box { background: #f0f9ff; border-left: 4px solid #0051a5; padding: 20px; margin: 20px 0; border-radius: 10px; }
+        footer { background: #1f2937; color: white; text-align: center; padding: 40px; border-radius: 15px; margin-top: 50px; }
+        @media print { .tabs, .btn-export { display: none; } .content { display: block !important; page-break-after: always; } body { background: white; } }
+        @media (max-width: 768px) { h1 { font-size: 2em; } .grid-2 { grid-template-columns: 1fr; } .header-content { flex-direction: column; text-align: center; } .tab { min-width: 150px; font-size: 0.9em; padding: 15px 10px; } }
     </style>
 </head>
 <body>
@@ -370,12 +78,12 @@
             </div>
         </header>
 
-        <div class="tabs">
-            <button class="tab active" onclick="showTab('overview')">Visão Geral</button>
-            <button class="tab" onclick="showTab('analytics')">Analytics</button>
-            <button class="tab" onclick="showTab('search')">Search Console</button>
-            <button class="tab" onclick="showTab('performance')">Performance</button>
-            <button class="tab" onclick="showTab('analysis')">Análise</button>
+        <div class="tabs" role="tablist" aria-label="Seções do relatório">
+            <button class="tab active" onclick="showTab('overview', this)">Visão Geral</button>
+            <button class="tab" onclick="showTab('analytics', this)">Analytics</button>
+            <button class="tab" onclick="showTab('search', this)">Search Console</button>
+            <button class="tab" onclick="showTab('performance', this)">Performance</button>
+            <button class="tab" onclick="showTab('analysis', this)">Análise</button>
         </div>
 
         <div id="overview" class="content active">
@@ -435,7 +143,7 @@
 
             <div class="chart-container">
                 <h3>Principais Cidades</h3>
-                    <canvas id="citiesChart"></canvas>
+                <canvas id="citiesChart"></canvas>
             </div>
 
             <div class="chart-container">
@@ -579,7 +287,7 @@
         <div id="analysis" class="content">
             <div class="analysis-section">
                 <h2>Análise Estratégica 2025</h2>
-                
+
                 <h3>Principais Conquistas</h3>
                 <ul>
                     <li><strong>Crescimento Consistente:</strong> 10.6% de aumento em usuários ativos</li>
@@ -628,90 +336,80 @@
     </div>
 
     <script>
-        function showTab(tabName) {
+        // Robust tab switcher (doesn't depend on a global `event`)
+        function showTab(tabName, tabEl) {
             var contents = document.querySelectorAll('.content');
             var tabs = document.querySelectorAll('.tab');
-            
-            contents.forEach(function(content) {
-                content.classList.remove('active');
-            });
-            
-            tabs.forEach(function(tab) {
-                tab.classList.remove('active');
-            });
-            
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+
+            contents.forEach(function(content) { content.classList.remove('active'); });
+            tabs.forEach(function(tab) { tab.classList.remove('active'); });
+
+            var target = document.getElementById(tabName);
+            if (target) target.classList.add('active');
+            if (tabEl && tabEl.classList) tabEl.classList.add('active');
         }
 
-        window.addEventListener('load', function() {
-            var trafficCtx = document.getElementById('trafficChart').getContext('2d');
-            new Chart(trafficCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Google Organic', 'Direto', 'Bing', 'Social Media', 'Outros'],
-                    datasets: [{
-                        data: [2900, 1300, 195, 58, 147],
-                        backgroundColor: ['#0051a5', '#6b7280', '#10b981', '#f59e0b', '#ec4899']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { position: 'bottom' }
-                    }
-                }
-            });
+        // Initialize charts after DOM is ready and only if canvas elements are present
+        window.addEventListener('DOMContentLoaded', function () {
+            if (!window.Chart) {
+                console.warn('Chart.js not loaded.');
+                return;
+            }
 
-            var pagesCtx = document.getElementById('pagesChart').getContext('2d');
-            new Chart(pagesCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Página Inicial', 'Serviços', 'Contato', 'Novidades', 'Valores'],
-                    datasets: [{
-                        label: 'Visualizações',
-                        data: [5200, 665, 592, 277, 145],
-                        backgroundColor: '#0051a5'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { display: false } }
-                }
-            });
+            var trafficCanvas = document.getElementById('trafficChart');
+            if (trafficCanvas) {
+                var ctx = trafficCanvas.getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Google Organic', 'Direto', 'Bing', 'Social Media', 'Outros'],
+                        datasets: [{
+                            data: [2900, 1300, 195, 58, 147],
+                            backgroundColor: ['#0051a5', '#6b7280', '#10b981', '#f59e0b', '#ec4899']
+                        }]
+                    },
+                    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+                });
+            }
 
-            var citiesCtx = document.getElementById('citiesChart').getContext('2d');
-            new Chart(citiesCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['São Paulo', 'Belo Horizonte', 'Rio de Janeiro', 'Vespasiano', 'Contagem'],
-                    datasets: [{
-                        label: 'Usuários',
-                        data: [941, 426, 102, 86, 82],
-                        backgroundColor: '#6b7280'
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true
-                }
-            });
+            var pagesCanvas = document.getElementById('pagesChart');
+            if (pagesCanvas) {
+                var pagesCtx = pagesCanvas.getContext('2d');
+                new Chart(pagesCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Página Inicial', 'Serviços', 'Contato', 'Novidades', 'Valores'],
+                        datasets: [{ label: 'Visualizações', data: [5200, 665, 592, 277, 145], backgroundColor: '#0051a5' }]
+                    },
+                    options: { responsive: true, plugins: { legend: { display: false } } }
+                });
+            }
 
-            var countriesCtx = document.getElementById('countriesChart').getContext('2d');
-            new Chart(countriesCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Brasil', 'EUA', 'Portugal', 'Espanha', 'Argentina', 'México'],
-                    datasets: [{
-                        label: 'Cliques',
-                        data: [3850, 420, 180, 145, 98, 75],
-                        backgroundColor: '#10b981'
-                    }]
-                },
-                options: {
-                    responsive: true
-                }
-            });
+            var citiesCanvas = document.getElementById('citiesChart');
+            if (citiesCanvas) {
+                var citiesCtx = citiesCanvas.getContext('2d');
+                new Chart(citiesCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['São Paulo', 'Belo Horizonte', 'Rio de Janeiro', 'Vespasiano', 'Contagem'],
+                        datasets: [{ label: 'Usuários', data: [941, 426, 102, 86, 82], backgroundColor: '#6b7280' }]
+                    },
+                    options: { indexAxis: 'y', responsive: true }
+                });
+            }
+
+            var countriesCanvas = document.getElementById('countriesChart');
+            if (countriesCanvas) {
+                var countriesCtx = countriesCanvas.getContext('2d');
+                new Chart(countriesCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Brasil', 'EUA', 'Portugal', 'Espanha', 'Argentina', 'México'],
+                        datasets: [{ label: 'Cliques', data: [3850, 420, 180, 145, 98, 75], backgroundColor: '#10b981' }]
+                    },
+                    options: { responsive: true }
+                });
+            }
         });
     </script>
 </body>
